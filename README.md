@@ -7,26 +7,19 @@ CBSE – 12th Standard (2023)
 
 CBSE – 10th Standard (2021)
 
-School of Open Learning (SOL), University of Delhi – Currently pursuing Bachelor of Arts (Programme) with Computer Application as one of the disciplines (2024)
+School of Open Learning (SOL), University of Delhi – Currently pursuing Bachelor of Arts (Programme) with Computer Application as one of the disciplines (2024-2026)
 
-Professional Diploma in Software and Hardware Engineering – Currently pursuing; includes training in software development, hardware fundamentals, and practical system maintenance (2024)
+Professional Diploma in Software and Hardware Engineering – Currently pursuing; includes training in software development, hardware fundamentals, and practical system maintenance (2023-2025)
 
-💼 Experience
-Fresher Web Developer (Project-Based) (2023 – Present)
+Volunteer & Certification
 
-Designed and developed responsive web pages using HTML, CSS, and basic JavaScript
+Hardware Support Volunteer
+Duration - 3 Month - 2025
+Assisted in computer hardware setup, assembling & maintenance.
 
-Created personal projects and assisted peers with website layouts and bug fixing
+Troubleshooting basic hardware issues.
 
-Applied principles of UI/UX for user-friendly interfaces
-
-Technical Training Projects (During Diploma & Coursework) (2023 – Present)
-
-Developed IoT-based applications using Python and sensors
-
-Worked on C++ and Python data structure exercises and projects
-
-Set up and configured basic network connections and practiced Linux command-line operations
+Helped with CSS styling for small web UI tasks.
 
 🛠️ Skills
 Ms Word, Ms Excel, Ms PowerPoint: 80%

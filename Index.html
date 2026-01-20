@@ -504,6 +504,11 @@ align-items: center;
 padding: 0 10px;
 }
 
+@media (max-width: 1023px) {
+  .navbar-item--theme {
+    order: -1;
+  }
+}
 .navbar-link {
 color: var(--light-gray);
 font-size: var(--fs-8);
@@ -1955,6 +1960,85 @@ main {
     height: 28px;
   }
 }
+  .theme-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.theme-switch__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.theme-switch__slider {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--onyx);
+  border: 1px solid var(--jet);
+  box-shadow: var(--shadow-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  transition: var(--transition-1);
+}
+
+.theme-switch__slider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: var(--orange-yellow-crayola);
+  transition: var(--transition-1);
+  box-shadow: var(--shadow-2);
+}
+
+.theme-switch__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--light-gray-70);
+  z-index: 1;
+}
+
+.theme-switch__input:focus-visible + .theme-switch__slider {
+  outline: 2px solid var(--orange-yellow-crayola);
+  outline-offset: 2px;
+}
+
+/* Checked = Light theme */
+.theme-switch__input:checked + .theme-switch__slider {
+  background: var(--eerie-black-2);
+}
+
+.theme-switch__input:checked + .theme-switch__slider::after {
+  left: 23px;
+}
+
+.theme-switch__input:checked + .theme-switch__slider .theme-switch__icon--sun {
+  color: var(--orange-yellow-crayola);
+}
+
+.theme-switch__input:not(:checked) + .theme-switch__slider .theme-switch__icon--moon {
+  color: var(--orange-yellow-crayola);
+}
   </style>
 </head>
 
@@ -2121,7 +2205,19 @@ main {
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Contact</button>
           </li>
-
+              <li class="navbar-item navbar-item--theme">
+            <label class="theme-switch" title="Toggle dark/light mode">
+              <input class="theme-switch__input" type="checkbox" data-theme-toggle aria-label="Toggle dark/light mode">
+              <span class="theme-switch__slider" aria-hidden="true">
+                <span class="theme-switch__icon theme-switch__icon--sun" aria-hidden="true">
+                  <ion-icon name="sunny-outline"></ion-icon>
+                </span>
+                <span class="theme-switch__icon theme-switch__icon--moon" aria-hidden="true">
+                  <ion-icon name="moon-outline"></ion-icon>
+                </span>
+              </span>
+            </label>
+          </li>
         </ul>
 
       </nav>
@@ -2994,7 +3090,36 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
 
   });
-}</script>
+  
+}
+  // Theme toggle (dark / light)
+const rootElement = document.documentElement;
+const themeToggleInput = document.querySelector("[data-theme-toggle]");
+
+const setTheme = (theme) => {
+  if (theme === "light") {
+    rootElement.setAttribute("data-theme", "light");
+    if (themeToggleInput) themeToggleInput.checked = true;
+  } else {
+    rootElement.removeAttribute("data-theme");
+    if (themeToggleInput) themeToggleInput.checked = false;
+  }
+  localStorage.setItem("theme", theme);
+};
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "light" || savedTheme === "dark") {
+  setTheme(savedTheme);
+} else {
+  setTheme("dark");
+}
+
+if (themeToggleInput) {
+  themeToggleInput.addEventListener("change", () => {
+    setTheme(themeToggleInput.checked ? "light" : "dark");
+  });
+}
+
+  </script>
 
   <!--
     - ionicon link
@@ -3005,6 +3130,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
 </body>
 
 </html>
+
 
 
 

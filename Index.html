@@ -138,6 +138,38 @@
 --transition-2: 0.5s ease-in-out;
 
 }
+/* Light theme overrides */
+html[data-theme="light"] {
+  /* swap background and surface colors to light */
+  --smoky-black: hsl(0, 0%, 96%);
+  --eerie-black-1: hsl(0, 0%, 100%);
+  --eerie-black-2: hsl(0, 0%, 100%);
+  --onyx: hsl(0, 0%, 92%);
+  --jet: hsl(0, 0%, 85%);
+
+  /* text colors become darker instead of white */
+  --white-1: hsl(0, 0%, 10%);
+  --white-2: hsl(0, 0%, 15%);
+  --light-gray: hsl(0, 0%, 25%);
+  --light-gray-70: hsla(0, 0%, 25%, 0.7);
+
+  /* keep accent colors similar but adjust gradients for light bg */
+  --bg-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 100%) 3%,
+    hsl(0, 0%, 96%) 97%
+  );
+  --bg-gradient-jet: linear-gradient(
+    to bottom right,
+    hsla(0, 0%, 92%, 0.45) 0%,
+    hsla(0, 0%, 100%, 0) 100%
+  ), hsl(0, 0%, 100%);
+  --border-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 90%) 0%,
+    hsla(0, 0%, 90%, 0) 50%
+  );
+}
 
 
 
@@ -3130,6 +3162,7 @@ if (themeToggleInput) {
 </body>
 
 </html>
+
 
 
 

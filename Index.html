@@ -3090,9 +3090,9 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
 
   });
-  
 }
-  // Theme toggle (dark / light)
+
+// Theme toggle (dark / light)
 const rootElement = document.documentElement;
 const themeToggleInput = document.querySelector("[data-theme-toggle]");
 
@@ -3106,6 +3106,7 @@ const setTheme = (theme) => {
   }
   localStorage.setItem("theme", theme);
 };
+
 const savedTheme = localStorage.getItem("theme");
 if (savedTheme === "light" || savedTheme === "dark") {
   setTheme(savedTheme);
@@ -3118,7 +3119,6 @@ if (themeToggleInput) {
     setTheme(themeToggleInput.checked ? "light" : "dark");
   });
 }
-
   </script>
 
   <!--
@@ -3130,6 +3130,7 @@ if (themeToggleInput) {
 </body>
 
 </html>
+
 
 
 

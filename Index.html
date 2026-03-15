@@ -2071,11 +2071,68 @@ main {
 .theme-switch__input:not(:checked) + .theme-switch__slider .theme-switch__icon--moon {
   color: var(--orange-yellow-crayola);
 }
+    /* loading screen*/
+#page-loader{
+  position:fixed;
+  inset:0;
+  background: var(--smoky-black);
+  z-index:999999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:1;
+  transition: opacity 60s ease, visibility 1s ease;
+}
+#page-loader.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+#page-loader .loader-inner{
+  width:min(520px, 86vw);
+  text-align:center;
+}
+#page-loader .loader-title{
+  font-family: var(--ff-poppins);
+  font-weight: 500;
+  letter-spacing: 10px;
+  text-transform: capitalize;
+  font-size: 20px;
+  color: var(--white-2);
+}
+#page-loader .loader-line{
+  margin: 22px auto 16px;
+  height: 3px;
+  width: 100%;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  overflow:hidden;
+}
+#page-loader .bar{
+  height:100%;
+  width:0%;
+  background: var(--orange-yellow-crayola);
+  border-radius: 999px;
+  transition: width .18s ease;
+}
+#page-loader .loader-sub{
+  font-family: var(--ff-poppins);
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--light-gray-70);
+}
+
   </style>
 </head>
 
 <body>
-
+    <div id="page-loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-title">Portfolio</div>
+      <div class="loader-line"><div class="bar"></div></div>
+      <div class="loader-sub">LOADING</div>
+    </div>
+  </div>
   <!--
     - #MAIN
   -->
@@ -2977,7 +3034,27 @@ main {
   -->
   <script>'use strict';
 
+  
+// page loading bar
+(function(){
+  const loader = document.getElementById("page-loader");
+  const bar = loader ? loader.querySelector(".bar") : null;
+  if (!loader || !bar) return;
 
+  let p = 0;
+  const tick = () => {
+    p = Math.min(90, p + Math.max(1, (90 - p) * 0.06));
+    bar.style.width = `${p}%`;
+  };
+  const timer = setInterval(tick, 120);
+  tick();
+
+  window.addEventListener("load", () => {
+    clearInterval(timer);
+    bar.style.width = "100%";
+    setTimeout(() => loader.classList.add("hidden"), 450);
+  });
+})();
 
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }

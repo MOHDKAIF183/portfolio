@@ -3044,17 +3044,18 @@ main {
        <section class="contact-form">
 
           <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="https://getform.io/f/bpjpxqmb" method="POST">
+         <form id="contactForm" data-form action="https://formspree.io/f/xnjggzln" method="POST">
   <div class="input-wrapper">
-    <input type="text" name="fullname" class="form-input" placeholder="Full name" required>
+    <input type="text" name="name" class="form-input" placeholder="Full name" required data-form-input>
 
-    <input type="email" name="email" class="form-input" placeholder="Email address" required>
+    <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
   </div>
 
-  <textarea name="message" class="form-input" placeholder="Your Message" required></textarea>
+  <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
 
-  <button class="form-btn" type="submit">
+  <div id="formMessage" style="margin-bottom: 15px; padding: 10px; border-radius: 8px; display: none;"></div>
+
+  <button class="form-btn" type="submit" data-form-btn>
     <span>Send Message</span>
   </button>
 </form>
@@ -3103,6 +3104,10 @@ main {
     setTimeout(() => loader.classList.add("hidden"), 450);
   });
 })();
+
+  // Formspree endpoint for contact form
+const FORMSPREE_URL = "https://formspree.io/f/xnjggzln";
+
 
 // element toggle function
 const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
@@ -3235,7 +3240,50 @@ for (let i = 0; i < formInputs.length; i++) {
 
   });
 }
+// form submission handler (AJAX via Formspree)
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
+  const formMessage = document.getElementById("formMessage");
+  const formData = new FormData(form);
+
+  formBtn.disabled = true;
+  formBtn.innerHTML = '<span>Sending...</span>';
+  formMessage.style.display = "none";
+
+  try {
+    const response = await fetch(FORMSPREE_URL, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    if (response.ok) {
+      formMessage.style.display = "block";
+      formMessage.style.backgroundColor = "hsla(120, 50%, 50%, 0.2)";
+      formMessage.style.color = "var(--white-2)";
+      formMessage.style.border = "1px solid hsla(120, 50%, 50%, 0.5)";
+      formMessage.textContent = "Message sent successfully!";
+
+      form.reset();
+      formBtn.setAttribute("disabled", "");
+    } else {
+      const data = await response.json().catch(() => ({}));
+      throw new Error(data.error || "Failed to send message");
+    }
+  } catch (error) {
+    formMessage.style.display = "block";
+    formMessage.style.backgroundColor = "hsla(0, 50%, 50%, 0.2)";
+    formMessage.style.color = "var(--white-2)";
+    formMessage.style.border = "1px solid hsla(0, 50%, 50%, 0.5)";
+    formMessage.textContent = "Error: " + (error.message || "Failed to send message. Please try again.");
+  } finally {
+    formBtn.disabled = false;
+    formBtn.innerHTML = '<span>Send Message</span>';
+  }
+});
 
 
 // page navigation variables

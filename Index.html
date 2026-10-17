@@ -1354,9 +1354,33 @@ cursor: not-allowed;
 \*-----------------------------------*/
 
 /**
-* responsive larger than 450px screen
-*/
 
+/* Responsive navbar: 275px to 420px */
+@media screen and (min-width: 275px) and (max-width: 420px) {
+
+  .navbar-list {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;
+    padding: 0 4px;
+  }
+
+  .navbar-item--theme {
+    order: 0;
+    flex: 0 0 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbar-link {
+    padding: 14px 2px;
+    font-size: clamp(8px, 2.6vw, 11px);
+    white-space: nowrap;
+    text-align: center;
+  }
 @media (min-width: 450px) {
 
 /**

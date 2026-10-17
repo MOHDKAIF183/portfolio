@@ -161,7 +161,7 @@ html[data-theme="light"] {
   /* text colors become darker instead of white */
   --white-1: hsl(0, 0%, 10%);
   --white-2: hsl(0, 0%, 15%);
-  --light-gray: hsl(0, 0%, 25%);
+  /* --light-gray: hsl(0, 0%, 25%); */
   --light-gray-70: hsla(0, 0%, 25%, 0.7);
 
   /* keep accent colors similar but adjust gradients for light bg */
@@ -2326,29 +2326,38 @@ main {
       <!--
         - #NAVBAR
       -->
-
-      <nav class="navbar">
+<nav class="navbar">
 
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
+            <button class="navbar-link  active" data-nav-link>
+             <i class="fa-regular fa-circle-user"></i>
+              About</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
+            <button class="navbar-link" data-nav-link>
+              <i class="fa-regular fa-file"></i>
+              Resume</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
+            <button class="navbar-link" data-nav-link>
+              <i class="fa-solid fa-folder-open"></i>
+              Portfolio</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Blog</button>
+            <button class="navbar-link" data-nav-link>
+              <i class="fa-solid fa-pen-to-square"></i>
+              Blog</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
+            <button class="navbar-link" data-nav-link>
+              <i class="fa-solid fa-envelope"></i>
+             Contact</button>
           </li>
               <li class="navbar-item navbar-item--theme">
             <label class="theme-switch" title="Toggle dark/light mode">
@@ -3306,7 +3315,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
 
     for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
+      if (this.textContent.trim().toLowerCase() === pages[i].dataset.page) {
         pages[i].classList.add("active");
         navigationLinks[i].classList.add("active");
         window.scrollTo(0, 0);
